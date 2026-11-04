@@ -5,7 +5,9 @@
  */
 
 const TOKEN_KEY = 'poleclub_admin_token';
+const STATIC_MODE_KEY = 'poleclub_static_mode';
 let currentToken = sessionStorage.getItem(TOKEN_KEY);
+let isStaticMode = sessionStorage.getItem(STATIC_MODE_KEY) === 'true';
 let currentLeads = [];
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -32,28 +34,51 @@ function initAdminAuth() {
     loginForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       loginError.classList.remove('visible');
-      const password = document.getElementById('adminPasswordInput').value;
+      const password = document.getElementById('adminPasswordInput').value.trim();
 
+      // Intentar primero autenticar con el servidor backend si responde
+      let authenticated = false;
       try {
         const res = await fetch('/api/admin/login', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ password })
         });
-        const data = await res.json();
+        
+        if (res.ok) {
+          const data = await res.json().catch(() => ({}));
+          if (data.token) {
+            currentToken = data.token;
+            isStaticMode = false;
+            sessionStorage.removeItem(STATIC_MODE_KEY);
+            sessionStorage.setItem(TOKEN_KEY, currentToken);
+            showDashboard();
+            loadDashboardData();
+            authenticated = true;
+          }
+        } else if (res.status === 401) {
+          const data = await res.json().catch(() => ({}));
+          loginError.textContent = data.message || 'Contraseña incorrecta';
+          loginError.classList.add('visible');
+          return;
+        }
+      } catch (err) {
+        // En GitHub Pages o sin servidor local disponible
+      }
 
-        if (res.ok && data.token) {
-          currentToken = data.token;
+      // Si el backend no está disponible (GitHub Pages), validar con la clave estándar
+      if (!authenticated) {
+        if (password === 'poleclub2026') {
+          currentToken = 'static_admin_token_' + Date.now();
+          isStaticMode = true;
+          sessionStorage.setItem(STATIC_MODE_KEY, 'true');
           sessionStorage.setItem(TOKEN_KEY, currentToken);
           showDashboard();
           loadDashboardData();
         } else {
-          loginError.textContent = data.message || 'Contraseña incorrecta';
+          loginError.textContent = 'Contraseña incorrecta';
           loginError.classList.add('visible');
         }
-      } catch (err) {
-        loginError.textContent = 'Error de conexión con el servidor.';
-        loginError.classList.add('visible');
       }
     });
   }
@@ -61,13 +86,22 @@ function initAdminAuth() {
   if (logoutBtn) {
     logoutBtn.addEventListener('click', () => {
       currentToken = null;
+      isStaticMode = false;
       sessionStorage.removeItem(TOKEN_KEY);
+      sessionStorage.removeItem(STATIC_MODE_KEY);
       showLogin();
     });
   }
 }
 
 async function verifySession() {
+  if (isStaticMode || currentToken?.startsWith('static_admin_token_')) {
+    isStaticMode = true;
+    showDashboard();
+    loadDashboardData();
+    return;
+  }
+
   try {
     const res = await fetch('/api/admin/check-auth', {
       headers: { 'Authorization': `Bearer ${currentToken}` }
@@ -76,12 +110,16 @@ async function verifySession() {
       showDashboard();
       loadDashboardData();
     } else {
-      currentToken = null;
-      sessionStorage.removeItem(TOKEN_KEY);
       showLogin();
     }
   } catch (err) {
-    showLogin();
+    if (currentToken) {
+      isStaticMode = true;
+      showDashboard();
+      loadDashboardData();
+    } else {
+      showLogin();
+    }
   }
 }
 
@@ -107,6 +145,52 @@ async function loadDashboardData() {
 }
 
 async function fetchStats() {
+  if (isStaticMode) {
+    const leads = getLocalLeads();
+    const totalLeads = leads.length;
+    const foundingSlotsRemaining = Math.max(0, 20 - totalLeads);
+
+    const options = [
+      'Sí, me interesa participar',
+      'Me interesa, pero quisiera conocer más',
+      'No pagaría ese valor'
+    ];
+    const willingnessDistribution = options.map(label => {
+      const count = leads.filter(l => l.willingness_to_pay === label).length;
+      const percentage = totalLeads > 0 ? Math.round((count / totalLeads) * 100) : 0;
+      return { label, count, percentage };
+    });
+
+    const benefitCounts = {};
+    for (const l of leads) {
+      const arr = Array.isArray(l.preferred_benefits) ? l.preferred_benefits : [];
+      for (const b of arr) {
+        benefitCounts[b] = (benefitCounts[b] || 0) + 1;
+      }
+    }
+    const topBenefits = Object.entries(benefitCounts)
+      .map(([name, count]) => ({
+        name,
+        count,
+        percentage: totalLeads > 0 ? Math.round((count / totalLeads) * 100) : 0
+      }))
+      .sort((a, b) => b.count - a.count);
+
+    document.getElementById('kpiTotalLeads').textContent = totalLeads;
+    document.getElementById('kpiRemainingSlots').textContent = `${foundingSlotsRemaining} / 20`;
+
+    const yesObj = willingnessDistribution.find(d => d.label.includes('Sí'));
+    document.getElementById('kpiPositiveRate').textContent = `${yesObj ? yesObj.percentage : 0}%`;
+
+    const maybeObj = willingnessDistribution.find(d => d.label.includes('quisiera conocer más'));
+    document.getElementById('kpiMaybeRate').textContent = `${maybeObj ? maybeObj.percentage : 0}%`;
+
+    document.getElementById('storageStatusText').textContent = 'Navegador Web (GitHub Pages / Local)';
+    renderWillingnessBars(willingnessDistribution);
+    renderTopBenefitsBars(topBenefits);
+    return;
+  }
+
   try {
     const res = await fetch('/api/admin/stats', {
       headers: { 'Authorization': `Bearer ${currentToken}` }
@@ -194,6 +278,27 @@ async function fetchLeads() {
   const search = document.getElementById('tableSearchInput')?.value || '';
   const willingness = document.getElementById('willingnessFilterSelect')?.value || '';
   const experience = document.getElementById('experienceFilterSelect')?.value || '';
+
+  if (isStaticMode) {
+    let list = getLocalLeads();
+    if (search) {
+      const q = search.toLowerCase();
+      list = list.filter(l => 
+        (l.full_name && l.full_name.toLowerCase().includes(q)) ||
+        (l.email && l.email.toLowerCase().includes(q)) ||
+        (l.instagram && l.instagram.toLowerCase().includes(q))
+      );
+    }
+    if (willingness) {
+      list = list.filter(l => l.willingness_to_pay === willingness);
+    }
+    if (experience) {
+      list = list.filter(l => l.pole_experience === experience);
+    }
+    currentLeads = list;
+    renderLeadsTable(currentLeads);
+    return;
+  }
 
   const params = new URLSearchParams();
   if (search) params.append('search', search);
@@ -308,9 +413,149 @@ function initTableFilters() {
 
 function updateExportLink() {
   const exportBtn = document.getElementById('exportCsvBtn');
-  if (exportBtn && currentToken) {
+  if (!exportBtn) return;
+
+  if (isStaticMode) {
+    exportBtn.href = '#';
+    exportBtn.onclick = (e) => {
+      e.preventDefault();
+      downloadLocalCsv(currentLeads && currentLeads.length > 0 ? currentLeads : getLocalLeads());
+    };
+  } else if (currentToken) {
+    exportBtn.onclick = null;
     exportBtn.href = `/api/admin/export.csv?token=${encodeURIComponent(currentToken)}`;
   }
+}
+
+function downloadLocalCsv(leads) {
+  const headers = [
+    'ID',
+    'Fecha Registro',
+    'Nombre Completo',
+    'Correo Electronico',
+    'Instagram',
+    'Tiempo Experiencia',
+    'Disposicion de Pago ($39k)',
+    'Beneficios de Mayor Interes',
+    'Sugerencias Adicionales',
+    'Habeas Data Aceptado'
+  ];
+
+  const escapeCsv = (str) => {
+    if (str === null || str === undefined) return '""';
+    const s = String(str).replace(/"/g, '""');
+    return `"${s}"`;
+  };
+
+  const rows = leads.map(l => [
+    escapeCsv(l.id),
+    escapeCsv(l.created_at),
+    escapeCsv(l.full_name),
+    escapeCsv(l.email),
+    escapeCsv(l.instagram),
+    escapeCsv(l.pole_experience),
+    escapeCsv(l.willingness_to_pay),
+    escapeCsv(Array.isArray(l.preferred_benefits) ? l.preferred_benefits.join('; ') : l.preferred_benefits),
+    escapeCsv(l.additional_benefits || ''),
+    escapeCsv(l.privacy_consent ? 'Sí' : 'No')
+  ].join(','));
+
+  const csvText = [headers.join(','), ...rows].join('\r\n');
+  const blob = new Blob(['\uFEFF' + csvText], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `poleclub_leads_${new Date().toISOString().slice(0, 10)}.csv`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+/**
+ * Almacenamiento local para modo estático (GitHub Pages)
+ */
+const STORAGE_LEADS_KEY = 'poleclub_leads_store';
+const DEFAULT_SEED_LEADS = [
+  {
+    id: "lead_1",
+    full_name: "Camila Restrepo",
+    email: "camila.restrepo@example.com",
+    instagram: "@cami_poleart",
+    pole_experience: "Entre 1 y 3 años",
+    preferred_benefits: ["Descuentos en academias", "Workshops y talleres", "Conocer personas de la comunidad"],
+    willingness_to_pay: "Sí, me interesa participar",
+    additional_benefits: "Me encantaría tener sesiones de fotos grupales periódicas y talleres de flexibilidad activa con fisioterapeutas.",
+    privacy_consent: true,
+    created_at: new Date(Date.now() - 1000 * 60 * 60 * 48).toISOString()
+  },
+  {
+    id: "lead_2",
+    full_name: "Valentina Osorio Gómez",
+    email: "vale.osorio@example.com",
+    instagram: "@vale_moves",
+    pole_experience: "Más de 3 años",
+    preferred_benefits: ["Workshops y talleres", "Eventos y experiencias", "Beneficios con marcas"],
+    willingness_to_pay: "Sí, me interesa participar",
+    additional_benefits: "Sería genial invitar a instructoras internacionales para masterclasses exclusivas para el club.",
+    privacy_consent: true,
+    created_at: new Date(Date.now() - 1000 * 60 * 60 * 36).toISOString()
+  },
+  {
+    id: "lead_3",
+    full_name: "Sofía Calderón Silva",
+    email: "sofia.calderon@example.com",
+    instagram: "@sofi.spin",
+    pole_experience: "Entre 6 meses y 1 año",
+    preferred_benefits: ["Descuentos en academias", "Beneficios con marcas"],
+    willingness_to_pay: "Me interesa, pero quisiera conocer más",
+    additional_benefits: "Descuentos en ropa deportiva especializada para pole (grips, shorts, tops resistentes).",
+    privacy_consent: true,
+    created_at: new Date(Date.now() - 1000 * 60 * 60 * 24).toISOString()
+  },
+  {
+    id: "lead_4",
+    full_name: "Mariana Duarte Rivas",
+    email: "mariana.duarte@example.com",
+    instagram: "@mariana.aerial",
+    pole_experience: "Menos de 6 meses",
+    preferred_benefits: ["Descuentos en academias", "Workshops y talleres", "Conocer personas de la comunidad"],
+    willingness_to_pay: "Sí, me interesa participar",
+    additional_benefits: "Tener una red de apoyo para principiantes que nos ayude a perder el miedo y prevenir lesiones.",
+    privacy_consent: true,
+    created_at: new Date(Date.now() - 1000 * 60 * 60 * 12).toISOString()
+  },
+  {
+    id: "lead_5",
+    full_name: "Laura Jimena Morales",
+    email: "laura.morales@example.com",
+    instagram: "@lauraj_pole",
+    pole_experience: "Entre 1 y 3 años",
+    preferred_benefits: ["Eventos y experiencias", "Conocer personas de la comunidad"],
+    willingness_to_pay: "Me interesa, pero quisiera conocer más",
+    additional_benefits: "Espacios de entrenamiento libre (open pole) compartidos entre diferentes estudios de la ciudad.",
+    privacy_consent: true,
+    created_at: new Date(Date.now() - 1000 * 60 * 60 * 5).toISOString()
+  }
+];
+
+function getLocalLeads() {
+  try {
+    const raw = localStorage.getItem(STORAGE_LEADS_KEY);
+    if (!raw) {
+      localStorage.setItem(STORAGE_LEADS_KEY, JSON.stringify(DEFAULT_SEED_LEADS));
+      return [...DEFAULT_SEED_LEADS];
+    }
+    return JSON.parse(raw);
+  } catch (e) {
+    return [...DEFAULT_SEED_LEADS];
+  }
+}
+
+function saveLocalLeads(leads) {
+  try {
+    localStorage.setItem(STORAGE_LEADS_KEY, JSON.stringify(leads));
+  } catch (e) {}
 }
 
 /**

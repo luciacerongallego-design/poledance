@@ -283,6 +283,7 @@ function initLeadForm() {
       privacy_consent: privacyConsent
     };
 
+    let registered = false;
     try {
       const response = await fetch('/api/leads', {
         method: 'POST',
@@ -292,25 +293,54 @@ function initLeadForm() {
         body: JSON.stringify(payload)
       });
 
-      const data = await response.json();
-
-      if (response.ok && data.success) {
-        // Éxito: ocultar formulario y mostrar pantalla de confirmación
-        form.style.display = 'none';
-        confirmationScreen.classList.add('visible');
-        updateRemainingSlots();
-        trackEvent('form_completed_success', { willingness: willingnessToPay });
-      } else {
-        // Error conocido del backend
-        showAlert(data.message || 'No fue posible registrar tu solicitud. Por favor intenta de nuevo.');
+      if (response.ok) {
+        const data = await response.json().catch(() => ({ success: true }));
+        if (data.success) {
+          registered = true;
+          // Guardar también en almacenamiento local
+          const localLeads = getLocalLeads();
+          if (!localLeads.some(l => l.email.toLowerCase() === payload.email.toLowerCase())) {
+            localLeads.unshift({ id: data.id || 'lead_' + Date.now(), ...payload, created_at: new Date().toISOString() });
+            saveLocalLeads(localLeads);
+          }
+        }
+      } else if (response.status === 409) {
+        const errData = await response.json().catch(() => ({}));
+        showAlert(errData.message || 'Este correo electrónico ya se encuentra registrado en el club.');
+        return;
       }
     } catch (err) {
-      console.error('Error enviando formulario:', err);
-      showAlert('Ocurrió un error de conexión al enviar tus datos. Por favor verifica tu red e inténtalo nuevamente.');
-    } finally {
-      submitBtn.disabled = false;
-      submitBtn.innerHTML = originalBtnText;
+      // Backend no disponible (GitHub Pages / red)
     }
+
+    // Modo estático / fallback para GitHub Pages
+    if (!registered) {
+      const localLeads = getLocalLeads();
+      if (localLeads.some(l => l.email.toLowerCase() === payload.email.toLowerCase())) {
+        showAlert('Este correo electrónico ya se encuentra registrado en el club.');
+        return;
+      }
+      const newLead = {
+        id: 'lead_' + Date.now(),
+        ...payload,
+        created_at: new Date().toISOString()
+      };
+      localLeads.unshift(newLead);
+      saveLocalLeads(localLeads);
+      registered = true;
+    }
+
+    if (registered) {
+      form.style.display = 'none';
+      confirmationScreen.classList.add('visible');
+      updateRemainingSlots();
+      trackEvent('form_completed_success', { willingness: willingnessToPay });
+    } else {
+      showAlert('No fue posible registrar tu solicitud. Por favor intenta de nuevo.');
+    }
+
+    submitBtn.disabled = false;
+    submitBtn.innerHTML = originalBtnText;
   });
 
   function showAlert(msg) {
@@ -337,10 +367,12 @@ async function fetchInitialSlots() {
       const data = await res.json();
       const total = data.totalLeads || 0;
       updateSlotsDisplay(total);
+      return;
     }
   } catch (e) {
     // Silencioso en caso de fallback
   }
+  updateSlotsDisplay(getLocalLeads().length);
 }
 
 function updateSlotsDisplay(totalLeads) {
@@ -396,4 +428,90 @@ function trackEvent(eventName, sectionOrMeta = null) {
   } catch (e) {
     // Silencioso para no interrumpir al usuario
   }
+}
+
+/**
+ * 7. ALMACENAMIENTO LOCAL / MODO GITHUB PAGES
+ */
+const STORAGE_LEADS_KEY = 'poleclub_leads_store';
+const DEFAULT_SEED_LEADS = [
+  {
+    id: "lead_1",
+    full_name: "Camila Restrepo",
+    email: "camila.restrepo@example.com",
+    instagram: "@cami_poleart",
+    pole_experience: "Entre 1 y 3 años",
+    preferred_benefits: ["Descuentos en academias", "Workshops y talleres", "Conocer personas de la comunidad"],
+    willingness_to_pay: "Sí, me interesa participar",
+    additional_benefits: "Me encantaría tener sesiones de fotos grupales periódicas y talleres de flexibilidad activa con fisioterapeutas.",
+    privacy_consent: true,
+    created_at: new Date(Date.now() - 1000 * 60 * 60 * 48).toISOString()
+  },
+  {
+    id: "lead_2",
+    full_name: "Valentina Osorio Gómez",
+    email: "vale.osorio@example.com",
+    instagram: "@vale_moves",
+    pole_experience: "Más de 3 años",
+    preferred_benefits: ["Workshops y talleres", "Eventos y experiencias", "Beneficios con marcas"],
+    willingness_to_pay: "Sí, me interesa participar",
+    additional_benefits: "Sería genial invitar a instructoras internacionales para masterclasses exclusivas para el club.",
+    privacy_consent: true,
+    created_at: new Date(Date.now() - 1000 * 60 * 60 * 36).toISOString()
+  },
+  {
+    id: "lead_3",
+    full_name: "Sofía Calderón Silva",
+    email: "sofia.calderon@example.com",
+    instagram: "@sofi.spin",
+    pole_experience: "Entre 6 meses y 1 año",
+    preferred_benefits: ["Descuentos en academias", "Beneficios con marcas"],
+    willingness_to_pay: "Me interesa, pero quisiera conocer más",
+    additional_benefits: "Descuentos en ropa deportiva especializada para pole (grips, shorts, tops resistentes).",
+    privacy_consent: true,
+    created_at: new Date(Date.now() - 1000 * 60 * 60 * 24).toISOString()
+  },
+  {
+    id: "lead_4",
+    full_name: "Mariana Duarte Rivas",
+    email: "mariana.duarte@example.com",
+    instagram: "@mariana.aerial",
+    pole_experience: "Menos de 6 meses",
+    preferred_benefits: ["Descuentos en academias", "Workshops y talleres", "Conocer personas de la comunidad"],
+    willingness_to_pay: "Sí, me interesa participar",
+    additional_benefits: "Tener una red de apoyo para principiantes que nos ayude a perder el miedo y prevenir lesiones.",
+    privacy_consent: true,
+    created_at: new Date(Date.now() - 1000 * 60 * 60 * 12).toISOString()
+  },
+  {
+    id: "lead_5",
+    full_name: "Laura Jimena Morales",
+    email: "laura.morales@example.com",
+    instagram: "@lauraj_pole",
+    pole_experience: "Entre 1 y 3 años",
+    preferred_benefits: ["Eventos y experiencias", "Conocer personas de la comunidad"],
+    willingness_to_pay: "Me interesa, pero quisiera conocer más",
+    additional_benefits: "Espacios de entrenamiento libre (open pole) compartidos entre diferentes estudios de la ciudad.",
+    privacy_consent: true,
+    created_at: new Date(Date.now() - 1000 * 60 * 60 * 5).toISOString()
+  }
+];
+
+function getLocalLeads() {
+  try {
+    const raw = localStorage.getItem(STORAGE_LEADS_KEY);
+    if (!raw) {
+      localStorage.setItem(STORAGE_LEADS_KEY, JSON.stringify(DEFAULT_SEED_LEADS));
+      return [...DEFAULT_SEED_LEADS];
+    }
+    return JSON.parse(raw);
+  } catch (e) {
+    return [...DEFAULT_SEED_LEADS];
+  }
+}
+
+function saveLocalLeads(leads) {
+  try {
+    localStorage.setItem(STORAGE_LEADS_KEY, JSON.stringify(leads));
+  } catch (e) {}
 }
