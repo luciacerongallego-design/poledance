@@ -436,71 +436,251 @@ function trackEvent(eventName, sectionOrMeta = null) {
 const STORAGE_LEADS_KEY = 'poleclub_leads_store';
 const DEFAULT_SEED_LEADS = [
   {
-    id: "lead_1",
-    full_name: "Camila Restrepo",
-    email: "camila.restrepo@example.com",
+    id: "lead_01",
+    full_name: "Camila Restrepo Cadavid",
+    email: "camila.restrepoc@gmail.com",
     instagram: "@cami_poleart",
     pole_experience: "Entre 1 y 3 años",
     preferred_benefits: ["Descuentos en academias", "Workshops y talleres", "Conocer personas de la comunidad"],
     willingness_to_pay: "Sí, me interesa participar",
     additional_benefits: "Me encantaría tener sesiones de fotos grupales periódicas y talleres de flexibilidad activa con fisioterapeutas.",
     privacy_consent: true,
-    created_at: new Date(Date.now() - 1000 * 60 * 60 * 48).toISOString()
+    created_at: "2026-11-01T14:20:10.000Z"
   },
   {
-    id: "lead_2",
+    id: "lead_02",
     full_name: "Valentina Osorio Gómez",
-    email: "vale.osorio@example.com",
+    email: "vale.osoriog@gmail.com",
     instagram: "@vale_moves",
     pole_experience: "Más de 3 años",
     preferred_benefits: ["Workshops y talleres", "Eventos y experiencias", "Beneficios con marcas"],
     willingness_to_pay: "Sí, me interesa participar",
-    additional_benefits: "Sería genial invitar a instructoras internacionales para masterclasses exclusivas para el club.",
+    additional_benefits: "Sería brutal traer profesoras internacionales para masterclasses de exotic y trucos dinámicos.",
     privacy_consent: true,
-    created_at: new Date(Date.now() - 1000 * 60 * 60 * 36).toISOString()
+    created_at: "2026-11-01T16:45:22.000Z"
   },
   {
-    id: "lead_3",
+    id: "lead_03",
     full_name: "Sofía Calderón Silva",
-    email: "sofia.calderon@example.com",
+    email: "sofi.calderon98@hotmail.com",
     instagram: "@sofi.spin",
     pole_experience: "Entre 6 meses y 1 año",
     preferred_benefits: ["Descuentos en academias", "Beneficios con marcas"],
     willingness_to_pay: "Me interesa, pero quisiera conocer más",
-    additional_benefits: "Descuentos en ropa deportiva especializada para pole (grips, shorts, tops resistentes).",
+    additional_benefits: "Descuentos en ropa deportiva especializada para pole (grips, shorts, tops resistentes) y magnesio líquido.",
     privacy_consent: true,
-    created_at: new Date(Date.now() - 1000 * 60 * 60 * 24).toISOString()
+    created_at: "2026-11-01T19:12:40.000Z"
   },
   {
-    id: "lead_4",
+    id: "lead_04",
     full_name: "Mariana Duarte Rivas",
-    email: "mariana.duarte@example.com",
+    email: "mariana.duarte.r@gmail.com",
     instagram: "@mariana.aerial",
     pole_experience: "Menos de 6 meses",
     preferred_benefits: ["Descuentos en academias", "Workshops y talleres", "Conocer personas de la comunidad"],
     willingness_to_pay: "Sí, me interesa participar",
-    additional_benefits: "Tener una red de apoyo para principiantes que nos ayude a perder el miedo y prevenir lesiones.",
+    additional_benefits: "Una red o grupo para principiantes para no sentir pena y perderle el miedo a invertir la figura.",
     privacy_consent: true,
-    created_at: new Date(Date.now() - 1000 * 60 * 60 * 12).toISOString()
+    created_at: "2026-11-01T21:05:15.000Z"
   },
   {
-    id: "lead_5",
-    full_name: "Laura Jimena Morales",
-    email: "laura.morales@example.com",
+    id: "lead_05",
+    full_name: "Laura Jimena Morales Vélez",
+    email: "laurajimena.m@outlook.com",
     instagram: "@lauraj_pole",
     pole_experience: "Entre 1 y 3 años",
     preferred_benefits: ["Eventos y experiencias", "Conocer personas de la comunidad"],
     willingness_to_pay: "Me interesa, pero quisiera conocer más",
-    additional_benefits: "Espacios de entrenamiento libre (open pole) compartidos entre diferentes estudios de la ciudad.",
+    additional_benefits: "Espacios de open pole o práctica libre compartidos entre academias aliadas sin tener que pagar clase completa.",
     privacy_consent: true,
-    created_at: new Date(Date.now() - 1000 * 60 * 60 * 5).toISOString()
+    created_at: "2026-11-02T09:30:00.000Z"
+  },
+  {
+    id: "lead_06",
+    full_name: "Daniela Henao Aristizábal",
+    email: "dani.henao.a@gmail.com",
+    instagram: "@dani.polefitness",
+    pole_experience: "Entre 1 y 3 años",
+    preferred_benefits: ["Descuentos en academias", "Workshops y talleres"],
+    willingness_to_pay: "Sí, me interesa participar",
+    additional_benefits: "Talleres de acondicionamiento físico enfocado en hombros y core para evitar lesiones.",
+    privacy_consent: true,
+    created_at: "2026-11-02T11:18:45.000Z"
+  },
+  {
+    id: "lead_07",
+    full_name: "Carolina Echeverri Londoño",
+    email: "caro.echeverri89@gmail.com",
+    instagram: "@caro.poleflow",
+    pole_experience: "Más de 3 años",
+    preferred_benefits: ["Eventos y experiencias", "Beneficios con marcas", "Conocer personas de la comunidad"],
+    willingness_to_pay: "Sí, me interesa participar",
+    additional_benefits: "Encuentros sociales o pole camps los fines de semana fuera de la ciudad.",
+    privacy_consent: true,
+    created_at: "2026-11-02T13:40:12.000Z"
+  },
+  {
+    id: "lead_08",
+    full_name: "Isabella Botero Montoya",
+    email: "isa.botero.m@hotmail.com",
+    instagram: "@isabotero_art",
+    pole_experience: "Menos de 6 meses",
+    preferred_benefits: ["Descuentos en academias", "Conocer personas de la comunidad"],
+    willingness_to_pay: "Me interesa, pero quisiera conocer más",
+    additional_benefits: "Alianzas con tiendas para comprar los primeros tacones Pleaser o protectores de empeine con descuento.",
+    privacy_consent: true,
+    created_at: "2026-11-02T15:55:04.000Z"
+  },
+  {
+    id: "lead_09",
+    full_name: "Juliana Zuluaga Pineda",
+    email: "juli.zuluagap@gmail.com",
+    instagram: "@julizuluaga_pole",
+    pole_experience: "Entre 6 meses y 1 año",
+    preferred_benefits: ["Workshops y talleres", "Eventos y experiencias"],
+    willingness_to_pay: "Sí, me interesa participar",
+    additional_benefits: "Workshops de Exotic Pole, técnica de tacones y musicalidad con profes invitadas.",
+    privacy_consent: true,
+    created_at: "2026-11-02T18:22:30.000Z"
+  },
+  {
+    id: "lead_10",
+    full_name: "Sara Tamayo Rendón",
+    email: "sara.tamayo.r@gmail.com",
+    instagram: "@saritamayo_pole",
+    pole_experience: "Entre 1 y 3 años",
+    preferred_benefits: ["Descuentos en academias", "Eventos y experiencias", "Beneficios con marcas"],
+    willingness_to_pay: "Sí, me interesa participar",
+    additional_benefits: "Poder entrenar en diferentes sedes o ciudades cuando viajo por trabajo (Poblado, Laureles, Envigado).",
+    privacy_consent: true,
+    created_at: "2026-11-02T20:45:19.000Z"
+  },
+  {
+    id: "lead_11",
+    full_name: "Paula Andrea Cifuentes",
+    email: "pau.cifuentes92@outlook.com",
+    instagram: "@pau_cifuentes_",
+    pole_experience: "Entre 6 meses y 1 año",
+    preferred_benefits: ["Descuentos en academias", "Conocer personas de la comunidad"],
+    willingness_to_pay: "Me interesa, pero quisiera conocer más",
+    additional_benefits: "Descuentos en fisioterapia deportiva y masajes de descarga muscular para la espalda.",
+    privacy_consent: true,
+    created_at: "2026-11-03T08:15:33.000Z"
+  },
+  {
+    id: "lead_12",
+    full_name: "Manuela Gaviria Quintero",
+    email: "manu.gaviria.q@gmail.com",
+    instagram: "@manu.poletricks",
+    pole_experience: "Más de 3 años",
+    preferred_benefits: ["Workshops y talleres", "Eventos y experiencias"],
+    willingness_to_pay: "Sí, me interesa participar",
+    additional_benefits: "Clases de pole sport enfocado en competición y figuras de alta dificultad técnica.",
+    privacy_consent: true,
+    created_at: "2026-11-03T10:02:11.000Z"
+  },
+  {
+    id: "lead_13",
+    full_name: "Andrea Salazar Castaño",
+    email: "andrea.salazarc@gmail.com",
+    instagram: "@andre.polesoul",
+    pole_experience: "Entre 1 y 3 años",
+    preferred_benefits: ["Workshops y talleres", "Conocer personas de la comunidad", "Beneficios con marcas"],
+    willingness_to_pay: "Sí, me interesa participar",
+    additional_benefits: "Comunidad de apoyo para compartir rutinas, tracks de música y tips de cuidado de la piel y moretones.",
+    privacy_consent: true,
+    created_at: "2026-11-03T11:47:50.000Z"
+  },
+  {
+    id: "lead_14",
+    full_name: "Natalia Jaramillo Mesa",
+    email: "naty.jaramillom@hotmail.com",
+    instagram: "@naty_aerialpole",
+    pole_experience: "Menos de 6 meses",
+    preferred_benefits: ["Descuentos en academias", "Workshops y talleres"],
+    willingness_to_pay: "Sí, me interesa participar",
+    additional_benefits: "Que haya talleres de fuerza base y estiramiento pasivo y activo entre semana.",
+    privacy_consent: true,
+    created_at: "2026-11-03T13:20:05.000Z"
+  },
+  {
+    id: "lead_15",
+    full_name: "Gabriela Arango Muñoz",
+    email: "gaby.arango.m@gmail.com",
+    instagram: "@gabyarango_spin",
+    pole_experience: "Entre 6 meses y 1 año",
+    preferred_benefits: ["Eventos y experiencias", "Beneficios con marcas"],
+    willingness_to_pay: "Me interesa, pero quisiera conocer más",
+    additional_benefits: "Eventos tipo exhibición o shows privados para que la comunidad pueda bailar en un ambiente seguro y sin juicios.",
+    privacy_consent: true,
+    created_at: "2026-11-03T14:55:40.000Z"
+  },
+  {
+    id: "lead_16",
+    full_name: "María José Piedrahíta",
+    email: "majopiedrahita88@gmail.com",
+    instagram: "@majo.poleflow",
+    pole_experience: "Entre 1 y 3 años",
+    preferred_benefits: ["Descuentos en academias", "Eventos y experiencias"],
+    willingness_to_pay: "Sí, me interesa participar",
+    additional_benefits: "Convenios con estudios que tengan barras de más de 4 metros para entrenar combos largos sin tocar el techo.",
+    privacy_consent: true,
+    created_at: "2026-11-03T16:10:18.000Z"
+  },
+  {
+    id: "lead_17",
+    full_name: "Estefanía Correa Betancur",
+    email: "estefi.correab@outlook.com",
+    instagram: "@estefi.dancepole",
+    pole_experience: "Más de 3 años",
+    preferred_benefits: ["Workshops y talleres", "Beneficios con marcas", "Conocer personas de la comunidad"],
+    willingness_to_pay: "Sí, me interesa participar",
+    additional_benefits: "Charlas sobre nutrición para deportistas de fuerza y suplementación deportiva adecuada.",
+    privacy_consent: true,
+    created_at: "2026-11-03T17:40:29.000Z"
+  },
+  {
+    id: "lead_18",
+    full_name: "Luciana Vargas Cardona",
+    email: "luciana.vargasc@gmail.com",
+    instagram: "@luci.polelife",
+    pole_experience: "Entre 6 meses y 1 año",
+    preferred_benefits: ["Descuentos en academias", "Workshops y talleres"],
+    willingness_to_pay: "Sí, me interesa participar",
+    additional_benefits: "Masterclasses de fluidez y transiciones en el piso (low flow y floorwork con rodilleras).",
+    privacy_consent: true,
+    created_at: "2026-11-03T19:05:14.000Z"
+  },
+  {
+    id: "lead_19",
+    full_name: "Vanessa Cardona Uribe",
+    email: "vane.cardonau@gmail.com",
+    instagram: "@vane_artpole",
+    pole_experience: "Entre 1 y 3 años",
+    preferred_benefits: ["Eventos y experiencias", "Conocer personas de la comunidad"],
+    willingness_to_pay: "Sí, me interesa participar",
+    additional_benefits: "Talleres de creación coreográfica y expresión escénica para soltar la timidez.",
+    privacy_consent: true,
+    created_at: "2026-11-03T20:30:55.000Z"
+  },
+  {
+    id: "lead_20",
+    full_name: "Alejandra Ríos Guzmán",
+    email: "aleja.riosg@gmail.com",
+    instagram: "@aleja_spinpole",
+    pole_experience: "Menos de 6 meses",
+    preferred_benefits: ["Descuentos en academias", "Beneficios con marcas", "Conocer personas de la comunidad"],
+    willingness_to_pay: "Me interesa, pero quisiera conocer más",
+    additional_benefits: "Guía o asesoría personalizada para saber qué grip usar según el clima y tipo de piel.",
+    privacy_consent: true,
+    created_at: "2026-11-03T21:40:10.000Z"
   }
 ];
 
 function getLocalLeads() {
   try {
     const raw = localStorage.getItem(STORAGE_LEADS_KEY);
-    if (!raw) {
+    if (!raw || JSON.parse(raw).length < 20) {
       localStorage.setItem(STORAGE_LEADS_KEY, JSON.stringify(DEFAULT_SEED_LEADS));
       return [...DEFAULT_SEED_LEADS];
     }
