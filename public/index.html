@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>POLE CLUB — Más que entrenar. Pertenecer.</title>
+  <meta name="description" content="Comunidad exclusiva para practicantes de pole dance. Conecta con academias, workshops, experiencias y beneficios en un espacio de bienestar y sofisticación.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='46' fill='%23171715'/><path d='M50 15 L50 85 M35 35 Q50 20 65 35 Q50 50 35 65 Q50 80 65 65' stroke='%23D8C9B5' stroke-width='4' fill='none'/></svg>">
+  <link rel="stylesheet" href="/css/styles.css?v=2">
+</head>
+<body>
+
+  <!-- ========================================================================
+       A. HEADER / NAVEGACIÓN
+       ======================================================================== -->
+  <header class="site-header" role="banner">
+    <div class="container header-container">
+      <!-- Logo -->
+      <a href="#inicio" class="brand-logo" aria-label="POLE CLUB Inicio">
+        <div class="brand-emblem">
+          <svg width="28" height="28" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="46" stroke="#171715" stroke-width="2.5" />
+            <path d="M50 12 L50 88" stroke="#171715" stroke-width="2" />
+            <path d="M35 32 C45 22 55 22 65 32 C55 42 45 42 35 52 C45 62 55 62 65 72" stroke="#A89B8B" stroke-width="2.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <span class="brand-name">POLE CLUB</span>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="nav-desktop" role="navigation" aria-label="Navegación principal">
+        <ul class="nav-menu">
+          <li><a href="#inicio" class="nav-link">Inicio</a></li>
+          <li><a href="#about" class="nav-link">El Club</a></li>
+          <li><a href="#beneficios" class="nav-link">Beneficios</a></li>
+          <li><a href="#membresia" class="nav-link">La Membresía</a></li>
+          <li><a href="#comunidad" class="nav-link">Comunidad</a></li>
+          <li><a href="#faq" class="nav-link">FAQ</a></li>
+        </ul>
+      </nav>
+
+      <!-- Desktop Actions -->
+      <div class="header-actions">
+        <button type="button" class="btn btn-primary btn-sm header-cta" data-open-modal="membership" data-track="cta_header_join">
+          ÚNETE AL CLUB
+        </button>
+        <button type="button" class="hamburger-btn" aria-label="Abrir menú de navegación" aria-expanded="false">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-nav-drawer" role="dialog" aria-modal="true" aria-label="Menú móvil">
+    <ul class="mobile-nav-links">
+      <li><a href="#inicio" class="mobile-nav-link">Inicio</a></li>
+      <li><a href="#about" class="mobile-nav-link">El Club</a></li>
+      <li><a href="#beneficios" class="mobile-nav-link">Beneficios</a></li>
+      <li><a href="#membresia" class="mobile-nav-link">La Membresía</a></li>
+      <li><a href="#comunidad" class="mobile-nav-link">Comunidad</a></li>
+      <li><a href="#faq" class="mobile-nav-link">FAQ</a></li>
+    </ul>
+    <div style="text-align: center;">
+      <button type="button" class="btn btn-primary" data-open-modal="membership" style="width: 100%; max-width: 280px;" data-track="cta_mobile_drawer_join">
+        ÚNETE AL CLUB
+      </button>
+    </div>
+  </div>
+
+  <main>
+    <!-- ======================================================================
+         B. HERO SECTION — PRESENTACIÓN EDITORIAL
+         ====================================================================== -->
+    <section id="inicio" class="hero-section">
+      <div class="container hero-grid">
+        <div class="hero-content">
+          <span class="editorial-tag">MEMBERSHIP DE COMUNIDAD • PILOTO EXCLUSIVO</span>
+          <h1 class="hero-title">Más que entrenar.<br><em>Pertenecer.</em></h1>
+          <p class="hero-subtitle">
+            Un espacio donde el movimiento conecta, las experiencias inspiran y la comunidad crece. Conecta tu práctica de pole dance con un universo de posibilidades.
+          </p>
+          <div class="hero-actions">
+            <a href="#membresia" class="btn btn-primary" data-track="hero_btn_discover_membership">
+              DESCUBRE LA MEMBRESÍA
+            </a>
+            <a href="#about" class="btn btn-secondary" data-track="hero_btn_explore_club">
+              CONOCE EL CLUB
+            </a>
+          </div>
+          <div class="hero-note">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+            <span>Fase de validación con beneficios preferenciales para miembros fundadores.</span>
+          </div>
+        </div>
+
+        <div class="hero-media-wrapper">
+          <div class="hero-image-frame">
+            <img 
+              src="https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=1200&q=85" 
+              alt="Movimiento corporal y práctica artística de pole dance en espacio contemporáneo"
+              class="hero-image"
+              loading="eager"
+            >
+          </div>
+          <div class="hero-badge-floating">
+            <span class="hero-badge-number slots-counter">20 cupos</span>
+            <span class="hero-badge-text">Edición Piloto Fundador</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scroll Indicator -->
+      <a href="#about" class="scroll-indicator" aria-label="Desplazarse a la siguiente sección">
+        <span>EXPLORAR</span>
+        <div class="scroll-line"></div>
+      </a>
+    </section>
+
+    <!-- ======================================================================
+         C. ABOUT — ¿QUÉ ES POLE CLUB?
+         ====================================================================== -->
+    <section id="about" class="about-section">
+      <div class="container">
+        <div class="about-header">
+          <span class="editorial-tag">FILOSOFÍA & PROPÓSITO</span>
+          <h2>Tu práctica va más allá del estudio.</h2>
+          <p>
+            Creemos que el pole dance es mucho más que una disciplina. Es movimiento, expresión, aprendizaje y conexión. Por eso creamos un espacio que reúne todo lo que sucede alrededor de esta comunidad.
+          </p>
+        </div>
+
+        <div class="about-pillars">
+          <!-- Pilar 01 -->
+          <div class="pillar-card">
+            <span class="pillar-number">01</span>
+            <h3 class="pillar-title">Movimiento</h3>
+            <p class="pillar-text">
+              La fuerza, la flexibilidad y el control corporal se transforman en una forma de expresión libre y consciente que trasciende cualquier estándar convencional de entrenamiento.
+            </p>
+          </div>
+
+          <!-- Pilar 02 -->
+          <div class="pillar-card">
+            <span class="pillar-number">02</span>
+            <h3 class="pillar-title">Conexión</h3>
+            <p class="pillar-text">
+              Encuentros reales, clases especiales y experiencias colectivas con personas que comprenden el proceso, celebran cada avance y comparten la misma pasión por el arte del pole.
+            </p>
+          </div>
+
+          <!-- Pilar 03 -->
+          <div class="pillar-card">
+            <span class="pillar-number">03</span>
+            <h3 class="pillar-title">Pertenencia</h3>
+            <p class="pillar-text">
+              Un entorno cercano, sofisticado e inclusivo donde nunca entrenas en aislamiento. Eres parte de un ecosistema que apoya tu bienestar y tu evolución técnica y creativa.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         D. BENEFICIOS — LO QUE ENCUENTRAS EN EL CLUB
+         ====================================================================== -->
+    <section id="beneficios" class="benefits-section">
+      <div class="container">
+        <div class="section-head-wrap">
+          <div class="section-head-left">
+            <span class="editorial-tag">BENEFICIOS DE COMUNIDAD</span>
+            <h2>Tu membresía abre nuevas posibilidades.</h2>
+          </div>
+          <div class="validation-notice">
+            Propuesta en validación comercial • Beneficios proyectados con aliados estratégicos.
+          </div>
+        </div>
+
+        <div class="benefits-grid">
+          <!-- Beneficio 01 -->
+          <article class="benefit-card">
+            <div class="benefit-image-wrap">
+              <span class="benefit-number-pill">01</span>
+              <img 
+                src="https://images.unsplash.com/photo-1545205597-3d9d02c29597?auto=format&fit=crop&w=700&q=80" 
+                alt="Espacio boutique de entrenamiento con luz natural" 
+                class="benefit-image"
+                loading="lazy"
+              >
+            </div>
+            <div class="benefit-body">
+              <h3 class="benefit-title">Academias</h3>
+              <p class="benefit-desc">
+                Entrena, explora y descubre nuevos espacios con beneficios especiales en academias aliadas.
+              </p>
+              <div class="benefit-tags">
+                <span class="benefit-tag-item">Open Pole</span>
+                <span class="benefit-tag-item">Tarifas preferenciales</span>
+                <span class="benefit-tag-item">Pases de cortesía</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Beneficio 02 -->
+          <article class="benefit-card">
+            <div class="benefit-image-wrap">
+              <span class="benefit-number-pill">02</span>
+              <img 
+                src="https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?auto=format&fit=crop&w=700&q=80" 
+                alt="Bailarina en taller especializado de expresión corporal" 
+                class="benefit-image"
+                loading="lazy"
+              >
+            </div>
+            <div class="benefit-body">
+              <h3 class="benefit-title">Workshops</h3>
+              <p class="benefit-desc">
+                Accede prioritariamente a talleres, clases especiales y experiencias de aprendizaje con instructoras destacadas.
+              </p>
+              <div class="benefit-tags">
+                <span class="benefit-tag-item">Masterclasses</span>
+                <span class="benefit-tag-item">Flexibilidad</span>
+                <span class="benefit-tag-item">Cupo anticipado</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Beneficio 03 -->
+          <article class="benefit-card">
+            <div class="benefit-image-wrap">
+              <span class="benefit-number-pill">03</span>
+              <img 
+                src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=700&q=80" 
+                alt="Encuentro social y comunitario de bienestar" 
+                class="benefit-image"
+                loading="lazy"
+              >
+            </div>
+            <div class="benefit-body">
+              <h3 class="benefit-title">Experiencias</h3>
+              <p class="benefit-desc">
+                Participa en encuentros, eventos y actividades exclusivas pensadas para compartir y celebrar el movimiento.
+              </p>
+              <div class="benefit-tags">
+                <span class="benefit-tag-item">Social Sessions</span>
+                <span class="benefit-tag-item">Retiros wellness</span>
+                <span class="benefit-tag-item">Comunidad activa</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Beneficio 04 -->
+          <article class="benefit-card">
+            <div class="benefit-image-wrap">
+              <span class="benefit-number-pill">04</span>
+              <img 
+                src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=700&q=80" 
+                alt="Productos de cuidado corporal y bienestar" 
+                class="benefit-image"
+                loading="lazy"
+              >
+            </div>
+            <div class="benefit-body">
+              <h3 class="benefit-title">Marcas y Servicios</h3>
+              <p class="benefit-desc">
+                Descubre beneficios especiales con marcas y servicios relacionados con tu estilo de vida y entrenamiento.
+              </p>
+              <div class="benefit-tags">
+                <span class="benefit-tag-item">Indumentaria</span>
+                <span class="benefit-tag-item">Grip & Cuidado</span>
+                <span class="benefit-tag-item">Fisioterapia</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         E. HOW IT WORKS — ¿CÓMO FUNCIONA?
+         ====================================================================== -->
+    <section class="how-section">
+      <div class="container">
+        <div class="how-header">
+          <span class="editorial-tag">PROCESO SIMPLE</span>
+          <h2>Pertenecer es sencillo.</h2>
+        </div>
+
+        <div class="steps-grid">
+          <!-- Paso 1 -->
+          <div class="step-card">
+            <div class="step-header">
+              <div class="step-circle">1</div>
+              <div class="step-line"></div>
+            </div>
+            <h3 class="step-name">Únete</h3>
+            <p class="step-text">
+              Regístrate y solicita tu membresía como miembro fundador para participar en el grupo piloto.
+            </p>
+          </div>
+
+          <!-- Paso 2 -->
+          <div class="step-card">
+            <div class="step-header">
+              <div class="step-circle">2</div>
+              <div class="step-line"></div>
+            </div>
+            <h3 class="step-name">Descubre</h3>
+            <p class="step-text">
+              Explora la red de academias aliadas, talleres programados y marcas con beneficios vigentes.
+            </p>
+          </div>
+
+          <!-- Paso 3 -->
+          <div class="step-card">
+            <div class="step-header">
+              <div class="step-circle">3</div>
+              <div class="step-line"></div>
+            </div>
+            <h3 class="step-name">Participa</h3>
+            <p class="step-text">
+              Accede a clases especiales, masterclasses y experiencias colectivas con reserva preferencial.
+            </p>
+          </div>
+
+          <!-- Paso 4 -->
+          <div class="step-card">
+            <div class="step-header">
+              <div class="step-circle">4</div>
+              <div class="step-line"></div>
+            </div>
+            <h3 class="step-name">Conecta</h3>
+            <p class="step-text">
+              Forma parte de una comunidad apasionada que comparte tus metas, tu disciplina y tu energía.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         F. MEMBERSHIP — PLANES Y PRECIOS (VALIDACIÓN COMERCIAL)
+         ====================================================================== -->
+    <section id="membresia" class="membership-section">
+      <div class="container">
+        <div class="membership-header">
+          <span class="editorial-tag on-dark">MEMBRESÍA & ACCESO</span>
+          <h2>Encuentra tu lugar en el club.</h2>
+          <p>
+            Queremos que la membresía sea tan accesible como enriquecedora. Conoce las opciones proyectadas y únete al grupo que definirá el futuro de nuestra comunidad.
+          </p>
+        </div>
+
+        <div class="membership-cards-wrap">
+          <!-- Plan Regular Proyectado -->
+          <div class="plan-card">
+            <span class="plan-type">Plan Regular Proyectado</span>
+            <h3 class="plan-name">POLE CLUB MEMBERSHIP</h3>
+            <div class="plan-price-wrap">
+              <span class="plan-price">$39.000</span>
+              <span class="plan-currency">COP / mes</span>
+            </div>
+            <p class="plan-price-caption">
+              Tarifa estándar mensual proyectada para miembros activos una vez culminada la fase piloto.
+            </p>
+
+            <ul class="plan-features">
+              <li class="plan-feature-item">
+                <svg class="plan-feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                <span>Acceso a beneficios de la comunidad general.</span>
+              </li>
+              <li class="plan-feature-item">
+                <svg class="plan-feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                <span>Descuentos en academias aliadas de la ciudad.</span>
+              </li>
+              <li class="plan-feature-item">
+                <svg class="plan-feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                <span>Acceso prioritario a workshops y clases magistrales.</span>
+              </li>
+              <li class="plan-feature-item">
+                <svg class="plan-feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                <span>Invitaciones a experiencias y encuentros exclusivos.</span>
+              </li>
+              <li class="plan-feature-item">
+                <svg class="plan-feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                <span>Beneficios con marcas y servicios participantes.</span>
+              </li>
+            </ul>
+
+            <button type="button" class="btn btn-secondary" style="color: #ffffff; border-color: rgba(255, 255, 255, 0.3);" data-open-modal="membership" data-track="plan_regular_click">
+              ME INTERESA ESTE PLAN
+            </button>
+          </div>
+
+          <!-- Oferta Piloto Miembro Fundador (Destacada) -->
+          <div class="plan-card featured">
+            <span class="plan-pill-ribbon">PILOTO EXCLUSIVO • 20 CUPOS</span>
+            <span class="plan-type" style="color: var(--color-sand);">Lanzamiento Limitado</span>
+            <h3 class="plan-name" style="color: #ffffff;">FOUNDING MEMBERS</h3>
+            <div class="plan-price-wrap">
+              <span class="plan-price" style="color: #ffffff;">$29.000</span>
+              <span class="plan-currency" style="color: var(--color-sand);">COP / mes</span>
+            </div>
+            <p class="plan-price-caption" style="color: #D2CDC4;">
+              Tarifa preferencial durante los tres primeros meses del programa piloto para las primeras 20 personas inscritas.
+            </p>
+
+            <!-- Contador de cupos en tiempo real -->
+            <div class="slots-tracker">
+              <span class="slots-text">Cupos disponibles para el piloto:</span>
+              <span class="slots-counter">Consultando cupos...</span>
+            </div>
+
+            <ul class="plan-features">
+              <li class="plan-feature-item">
+                <svg class="plan-feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                <span><strong>Todos los beneficios regulares</strong> de la membresía POLE CLUB.</span>
+              </li>
+              <li class="plan-feature-item">
+                <svg class="plan-feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                <span><strong>25% de descuento especial</strong> en tu suscripción inicial.</span>
+              </li>
+              <li class="plan-feature-item">
+                <svg class="plan-feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                <span>Distintivo de <em>Miembro Fundador</em> vitalicio en la comunidad.</span>
+              </li>
+              <li class="plan-feature-item">
+                <svg class="plan-feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                <span>Voz y voto en la selección de los primeros talleres y alianzas.</span>
+              </li>
+              <li class="plan-feature-item">
+                <svg class="plan-feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                <span>Kit digital de bienvenida exclusivo para fundadoras.</span>
+              </li>
+            </ul>
+
+            <button type="button" class="btn btn-gold btn-gold-on-dark" data-open-modal="membership" data-track="plan_founding_click">
+              QUIERO SER MIEMBRO FUNDADOR
+            </button>
+          </div>
+        </div>
+
+        <div class="membership-disclaimer">
+          <strong>Aviso de validación:</strong> Este formulario no realiza ningún cobro automático ni requiere datos de tarjeta de crédito. Tu registro representa una manifestación de interés preliminar para validar el piloto del modelo de negocio.
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         G. COMMUNITY — SENTIDO DE PERTENENCIA
+         ====================================================================== -->
+    <section id="comunidad" class="community-section">
+      <div class="container">
+        <div class="community-header">
+          <span class="editorial-tag">VIDA EN COMUNIDAD</span>
+          <h2>No tienes que hacerlo sola.</h2>
+          <p>
+            Una comunidad se construye compartiendo. Pole Club conecta personas, espacios y experiencias para que cada práctica se convierta en una oportunidad de descubrir algo nuevo.
+          </p>
+        </div>
+
+        <div class="community-gallery">
+          <div class="gallery-item">
+            <img 
+              src="https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=700&q=80" 
+              alt="Entrenamiento consciente de pole dance" 
+              class="gallery-img"
+              loading="lazy"
+            >
+            <div class="gallery-overlay">
+              <span class="gallery-caption">Entrenamiento compartido & apoyo mutuo</span>
+            </div>
+          </div>
+
+          <div class="gallery-item">
+            <img 
+              src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=700&q=80" 
+              alt="Talleres de flexibilidad y bienestar integral" 
+              class="gallery-img"
+              loading="lazy"
+            >
+            <div class="gallery-overlay">
+              <span class="gallery-caption">Workshops de técnica & alineación</span>
+            </div>
+          </div>
+
+          <div class="gallery-item">
+            <img 
+              src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=700&q=80" 
+              alt="Encuentro social de la comunidad de practicantes" 
+              class="gallery-img"
+              loading="lazy"
+            >
+            <div class="gallery-overlay">
+              <span class="gallery-caption">Encuentros sociales & nuevas amistades</span>
+            </div>
+          </div>
+
+          <div class="gallery-item">
+            <img 
+              src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=700&q=80" 
+              alt="Celebración del progreso individual y colectivo" 
+              class="gallery-img"
+              loading="lazy"
+            >
+            <div class="gallery-overlay">
+              <span class="gallery-caption">Celebración de cada logro</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="community-quote-block">
+          <blockquote class="community-quote">
+            "El pole dance me enseñó que la fuerza no tiene un solo molde. Tener un espacio donde compartir el proceso, reírse de las caídas y celebrar cada progreso lo transforma todo."
+          </blockquote>
+          <cite class="community-quote-author">Testimonio de la comunidad piloto</cite>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         H. FAQ — PREGUNTAS FRECUENTES (ACORDEÓN INTERACTIVO)
+         ====================================================================== -->
+    <section id="faq" class="faq-section">
+      <div class="container container-narrow">
+        <div class="faq-header">
+          <span class="editorial-tag">CLARIDAD & DETALLES</span>
+          <h2>Preguntas Frecuentes</h2>
+          <p>Todo lo que necesitas saber sobre el funcionamiento del club y la fase piloto.</p>
+        </div>
+
+        <div class="faq-container">
+          <!-- Pregunta 1 -->
+          <div class="faq-item">
+            <button type="button" class="faq-question-btn" aria-expanded="false">
+              <span>¿Qué es Pole Club?</span>
+              <div class="faq-icon-wrap" aria-hidden="true">+</div>
+            </button>
+            <div class="faq-answer-wrap">
+              <p class="faq-answer-text">
+                POLE CLUB es una comunidad de membresía creada para conectar a personas que practican pole dance con academias aliadas, talleres especializados, eventos colectivos, marcas de estilo de vida y otras practicantes. No somos un estudio único ni una tienda: somos el puente que une todo lo que rodea esta disciplina.
+              </p>
+            </div>
+          </div>
+
+          <!-- Pregunta 2 -->
+          <div class="faq-item">
+            <button type="button" class="faq-question-btn" aria-expanded="false">
+              <span>¿Qué incluye la membresía?</span>
+              <div class="faq-icon-wrap" aria-hidden="true">+</div>
+            </button>
+            <div class="faq-answer-wrap">
+              <p class="faq-answer-text">
+                Tu suscripción te da acceso a tarifas preferenciales y descuentos en academias aliadas para entrenar o practicar libre (open pole), reserva prioritaria en masterclasses y workshops con instructoras nacionales e internacionales, invitaciones a encuentros comunitarios y beneficios especiales con marcas de vestuario, grips y bienestar.
+              </p>
+            </div>
+          </div>
+
+          <!-- Pregunta 3 -->
+          <div class="faq-item">
+            <button type="button" class="faq-question-btn" aria-expanded="false">
+              <span>¿Cómo puedo acceder a los beneficios?</span>
+              <div class="faq-icon-wrap" aria-hidden="true">+</div>
+            </button>
+            <div class="faq-answer-wrap">
+              <p class="faq-answer-text">
+                Una vez activado el piloto, recibirás un carné digital exclusivo y acceso a nuestro canal privado de miembros donde podrás consultar el catálogo de academias, códigos de beneficio y el calendario actualizado de workshops y experiencias.
+              </p>
+            </div>
+          </div>
+
+          <!-- Pregunta 4 -->
+          <div class="faq-item">
+            <button type="button" class="faq-question-btn" aria-expanded="false">
+              <span>¿Cuánto cuesta pertenecer al club?</span>
+              <div class="faq-icon-wrap" aria-hidden="true">+</div>
+            </button>
+            <div class="faq-answer-wrap">
+              <p class="faq-answer-text">
+                El precio regular proyectado es de $39.000 COP al mes. Para quienes se sumen al piloto como <em>Miembros Fundadores</em>, el valor preferencial será de $29.000 COP al mes durante los tres primeros meses. Este registro inicial es totalmente libre de costo y no exige ningún cobro anticipado.
+              </p>
+            </div>
+          </div>
+
+          <!-- Pregunta 5 -->
+          <div class="faq-item">
+            <button type="button" class="faq-question-btn" aria-expanded="false">
+              <span>¿Necesito tener experiencia practicando pole dance?</span>
+              <div class="faq-icon-wrap" aria-hidden="true">+</div>
+            </button>
+            <div class="faq-answer-wrap">
+              <p class="faq-answer-text">
+                No. POLE CLUB es un espacio inclusivo y abierto para todos los niveles: desde personas que acaban de iniciar su primera clase y buscan motivación, hasta practicantes intermedias e instructoras avanzadas que desean expandir su red y explorar nuevos espacios.
+              </p>
+            </div>
+          </div>
+
+          <!-- Pregunta 6 -->
+          <div class="faq-item">
+            <button type="button" class="faq-question-btn" aria-expanded="false">
+              <span>¿Cómo puedo participar en el piloto?</span>
+              <div class="faq-icon-wrap" aria-hidden="true">+</div>
+            </button>
+            <div class="faq-answer-wrap">
+              <p class="faq-answer-text">
+                Es muy simple: haz clic en "QUIERO SER MIEMBRO FUNDADOR", completa el formulario con tus datos y tus preferencias. Si quedas entre los primeros 20 cupos, nuestro equipo se comunicará contigo vía correo e Instagram para coordinar la bienvenida oficial al piloto.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ========================================================================
+       I. FOOTER
+       ======================================================================== -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand-wrap">
+          <span class="footer-brand-logo">POLE CLUB</span>
+          <p class="footer-slogan">"Más que entrenar. Pertenecer."</p>
+          <p class="footer-desc">
+            Comunidad y membresía para practicantes de pole dance. Conectando personas, academias y bienestar contemporáneo.
+          </p>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Navegación</h4>
+          <ul class="footer-links">
+            <li><a href="#inicio" class="footer-link">Inicio</a></li>
+            <li><a href="#about" class="footer-link">El Club</a></li>
+            <li><a href="#beneficios" class="footer-link">Beneficios</a></li>
+            <li><a href="#membresia" class="footer-link">Membresía</a></li>
+            <li><a href="#comunidad" class="footer-link">Comunidad</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Comunidad</h4>
+          <ul class="footer-links">
+            <li><a href="https://instagram.com" target="_blank" rel="noopener" class="footer-link">Instagram (@poleclub.co)*</a></li>
+            <li><a href="mailto:hola@poleclub.co" class="footer-link">hola@poleclub.co*</a></li>
+            <li><span style="font-size: 0.75rem; color: #6E685E;">*Canales conceptuales del proyecto</span></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Piloto 2026</h4>
+          <ul class="footer-links">
+            <li><a href="#membresia" class="footer-link">Inscripción Miembros Fundadores</a></li>
+            <li><a href="/privacidad" class="footer-link">Tratamiento de Datos</a></li>
+            <li><a href="/admin" class="admin-access-link">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+              </svg>
+              <span>Acceso Administrativo</span>
+            </a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          © 2026 POLE CLUB. Todos los derechos reservados. Proyecto en fase de validación comercial.
+        </div>
+        <div class="footer-legal-links">
+          <a href="/privacidad" style="color: inherit; text-decoration: underline;">Política de Privacidad</a>
+          <a href="/admin" style="color: inherit; text-decoration: underline;">Panel Admin</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========================================================================
+       MODAL DE REGISTRO — FORMULARIO PRINCIPAL
+       ======================================================================== -->
+  <div id="membershipModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-container">
+      <button type="button" class="modal-close-btn" data-close-modal aria-label="Cerrar formulario">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+
+      <div class="modal-content-wrap">
+        <!-- FORMULARIO DE CAPTURA -->
+        <form id="membershipForm" novalidate>
+          <div class="modal-header">
+            <span class="editorial-tag">MEMBRESÍA PILOTO</span>
+            <h2 id="modalTitle" class="modal-title">Tu lugar en el club comienza aquí.</h2>
+            <p class="modal-subtitle">
+              Queremos conocerte y saber qué experiencias te gustaría encontrar en Pole Club.
+            </p>
+          </div>
+
+          <!-- Alerta de error -->
+          <div id="formAlert" class="form-alert" role="alert"></div>
+
+          <!-- Campo 1: Nombre completo -->
+          <div class="form-group">
+            <label for="fullNameInput" class="form-label">
+              1. Nombre completo <span class="required">*</span>
+            </label>
+            <input 
+              type="text" 
+              id="fullNameInput" 
+              name="full_name" 
+              class="form-input" 
+              placeholder="Ej. Valentina Restrepo Gómez" 
+              required
+            >
+          </div>
+
+          <!-- Campo 2: Correo electrónico -->
+          <div class="form-group">
+            <label for="emailInput" class="form-label">
+              2. Correo electrónico <span class="required">*</span>
+            </label>
+            <input 
+              type="email" 
+              id="emailInput" 
+              name="email" 
+              class="form-input" 
+              placeholder="tu@correo.com" 
+              required
+            >
+          </div>
+
+          <!-- Campo 3: Usuario de Instagram -->
+          <div class="form-group">
+            <label for="instagramInput" class="form-label">
+              3. Usuario de Instagram <span class="required">*</span>
+            </label>
+            <div class="input-with-prefix">
+              <span class="input-prefix">@</span>
+              <input 
+                type="text" 
+                id="instagramInput" 
+                name="instagram" 
+                class="form-input" 
+                placeholder="tu_usuario" 
+                required
+              >
+            </div>
+          </div>
+
+          <!-- Campo 4: Tiempo practicando pole dance -->
+          <div class="form-group">
+            <label class="form-label">
+              4. ¿Cuánto tiempo llevas practicando pole dance? <span class="required">*</span>
+            </label>
+            <div class="options-pills-grid">
+              <label class="pill-option-label">
+                <input type="radio" name="pole_experience" value="Menos de 6 meses">
+                <span>Menos de 6 meses</span>
+              </label>
+              <label class="pill-option-label">
+                <input type="radio" name="pole_experience" value="Entre 6 meses y 1 año">
+                <span>Entre 6 meses y 1 año</span>
+              </label>
+              <label class="pill-option-label">
+                <input type="radio" name="pole_experience" value="Entre 1 y 3 años">
+                <span>Entre 1 y 3 años</span>
+              </label>
+              <label class="pill-option-label">
+                <input type="radio" name="pole_experience" value="Más de 3 años">
+                <span>Más de 3 años</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Campo 5: Beneficios de mayor interés -->
+          <div class="form-group">
+            <label class="form-label">
+              5. ¿Qué beneficios te interesan más? <span class="required">* (Selecciona al menos uno)</span>
+            </label>
+            <div class="tags-multi-grid">
+              <label class="tag-checkbox-label">
+                <input type="checkbox" name="preferred_benefits" value="Descuentos en academias">
+                <span>Descuentos en academias</span>
+              </label>
+              <label class="tag-checkbox-label">
+                <input type="checkbox" name="preferred_benefits" value="Workshops y talleres">
+                <span>Workshops y talleres</span>
+              </label>
+              <label class="tag-checkbox-label">
+                <input type="checkbox" name="preferred_benefits" value="Eventos y experiencias">
+                <span>Eventos y experiencias</span>
+              </label>
+              <label class="tag-checkbox-label">
+                <input type="checkbox" name="preferred_benefits" value="Beneficios con marcas">
+                <span>Beneficios con marcas</span>
+              </label>
+              <label class="tag-checkbox-label">
+                <input type="checkbox" name="preferred_benefits" value="Conocer personas de la comunidad">
+                <span>Conocer personas de la comunidad</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Campo 6: Disposición de pago -->
+          <div class="form-group">
+            <label class="form-label">
+              6. ¿Pagarías $39.000 COP mensuales por esta membresía? <span class="required">*</span>
+            </label>
+            <div class="payment-options-col">
+              <label class="payment-option-card">
+                <input type="radio" name="willingness_to_pay" value="Sí, me interesa participar">
+                <span class="payment-card-text">Sí, me interesa participar.</span>
+              </label>
+              <label class="payment-option-card">
+                <input type="radio" name="willingness_to_pay" value="Me interesa, pero quisiera conocer más">
+                <span class="payment-card-text">Me interesa, pero quisiera conocer más.</span>
+              </label>
+              <label class="payment-option-card">
+                <input type="radio" name="willingness_to_pay" value="No pagaría ese valor">
+                <span class="payment-card-text">No pagaría ese valor.</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Campo 7: Beneficio adicional opcional -->
+          <div class="form-group">
+            <label for="additionalBenefitsInput" class="form-label">
+              7. ¿Qué otro beneficio te gustaría encontrar en Pole Club? <span style="font-weight: 300; text-transform: none; color: #8C867C;">(Opcional)</span>
+            </label>
+            <textarea 
+              id="additionalBenefitsInput" 
+              name="additional_benefits" 
+              class="form-textarea" 
+              rows="3" 
+              placeholder="Cuéntanos ideas, marcas que te gusten o experiencias que soñarías vivir..."
+            ></textarea>
+          </div>
+
+          <!-- Consentimiento Habeas Data -->
+          <div class="form-group" style="margin-top: 1.8rem;">
+            <label class="consent-checkbox-wrap">
+              <input type="checkbox" name="privacy_consent" id="privacyConsentInput" required>
+              <span class="consent-text">
+                Acepto la <a href="/privacidad" target="_blank">política de tratamiento de datos personales</a> y autorizo a POLE CLUB para contactarme exclusivamente sobre el piloto del proyecto.
+              </span>
+            </label>
+          </div>
+
+          <!-- Botón de Envío -->
+          <div style="margin-top: 2rem;">
+            <button type="submit" id="submitLeadBtn" class="btn btn-primary" style="width: 100%;">
+              ENVIAR MI SOLICITUD
+            </button>
+          </div>
+        </form>
+
+        <!-- PANTALLA DE CONFIRMACIÓN -->
+        <div id="confirmationScreen" class="confirmation-screen">
+          <div class="confirm-check-icon">
+            <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+          </div>
+          <h2 class="confirm-title">¡Qué bueno tenerte aquí!</h2>
+          <p class="confirm-text">
+            Tu interés en Pole Club ha sido registrado. Estamos construyendo una comunidad alrededor del movimiento, las experiencias y la conexión. Pronto podrás conocer los siguientes pasos del piloto.
+          </p>
+          <div>
+            <button type="button" id="modalReturnHomeBtn" class="btn btn-primary">
+              VOLVER AL INICIO
+            </button>
+          </div>
+          <div class="confirm-meta-note">
+            Este registro no genera ningún cobro ni compromiso comercial activo.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/app.js"></script>
+</body>
+</html>

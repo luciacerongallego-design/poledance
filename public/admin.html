@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>POLE CLUB — Panel de Validación & Métricas PMV</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='46' fill='%23171715'/><path d='M50 15 L50 85 M35 35 Q50 20 65 35 Q50 50 35 65 Q50 80 65 65' stroke='%23D8C9B5' stroke-width='4' fill='none'/></svg>">
+  <link rel="stylesheet" href="/css/admin.css?v=2">
+</head>
+<body>
+
+  <!-- ========================================================================
+       1. PANTALLA DE LOGIN PROTEGIDO
+       ======================================================================== -->
+  <div id="loginWrapper" class="login-wrapper">
+    <div class="login-card">
+      <div style="margin-bottom: 1.5rem;">
+        <svg width="36" height="36" viewBox="0 0 100 100" fill="none" style="margin: 0 auto;">
+          <circle cx="50" cy="50" r="46" stroke="#D8C9B5" stroke-width="2.5" />
+          <path d="M50 12 L50 88" stroke="#D8C9B5" stroke-width="2" />
+          <path d="M35 32 C45 22 55 22 65 32 C55 42 45 42 35 52 C45 62 55 62 65 72" stroke="#A89B8B" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <h1 class="login-brand-logo">POLE CLUB</h1>
+      <p class="login-subtitle">Panel de Validación Comercial & Analítica PMV</p>
+
+      <form id="adminLoginForm">
+        <input 
+          type="password" 
+          id="adminPasswordInput" 
+          class="login-input" 
+          placeholder="Contraseña de administrador" 
+          required 
+          autocomplete="current-password"
+        >
+        <button type="submit" class="login-btn">INGRESAR AL PANEL</button>
+      </form>
+
+      <div id="loginError" class="login-error"></div>
+
+      <div style="margin-top: 2rem; font-size: 0.75rem; color: var(--text-dim);">
+        Acceso restringido para el equipo de dirección y producto.
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       2. DASHBOARD PRINCIPAL
+       ======================================================================== -->
+  <div id="dashboardWrapper" class="dashboard-wrapper">
+    <!-- Navbar superior -->
+    <header class="admin-navbar">
+      <div class="admin-nav-left">
+        <span class="admin-logo">POLE CLUB</span>
+        <span class="admin-badge-role">Portal Administrativo</span>
+      </div>
+      <div class="admin-nav-right">
+        <a href="/" class="nav-action-btn" target="_blank">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+            <polyline points="15 3 21 3 21 9"></polyline>
+            <line x1="10" y1="14" x2="21" y2="3"></line>
+          </svg>
+          <span>Ver Landing</span>
+        </a>
+        <button type="button" id="logoutBtn" class="nav-action-btn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+            <polyline points="16 17 21 12 16 7"></polyline>
+            <line x1="21" y1="12" x2="9" y2="12"></line>
+          </svg>
+          <span>Cerrar Sesión</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Contenedor de contenido -->
+    <main class="admin-content">
+      <div class="dashboard-title-wrap">
+        <div>
+          <h2 class="dashboard-title">Métricas de Validación PMV</h2>
+          <p class="dashboard-subtitle">Hipótesis comercial: Disposición de pago para la membresía de comunidad de pole dance.</p>
+        </div>
+        <div class="status-indicator">
+          <span class="status-dot"></span>
+          <span>Almacenamiento: <strong id="storageStatusText" style="color: var(--color-sand);">Cargando...</strong></span>
+        </div>
+      </div>
+
+      <!-- Tarjetas de Métricas (KPIs) -->
+      <section class="kpi-grid">
+        <div class="kpi-card">
+          <div class="kpi-label">Total Leads Registrados</div>
+          <div id="kpiTotalLeads" class="kpi-value">0</div>
+          <div class="kpi-subtext">Manifestaciones de interés activas</div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-label">Cupos Fundadores Restantes</div>
+          <div id="kpiRemainingSlots" class="kpi-value">20 / 20</div>
+          <div class="kpi-subtext">Meta de la fase piloto (20 personas)</div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-label">Disposición Firme de Pago</div>
+          <div id="kpiPositiveRate" class="kpi-value">0%</div>
+          <div class="kpi-subtext">Respondieron "Sí, me interesa participar"</div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-label">Interés con Dudas</div>
+          <div id="kpiMaybeRate" class="kpi-value">0%</div>
+          <div class="kpi-subtext">Respondieron "Quisiera conocer más"</div>
+        </div>
+      </section>
+
+      <!-- Paneles de Análisis de Hipótesis -->
+      <section class="analysis-grid">
+        <!-- Gráfica 1: Disposición de Pago -->
+        <div class="analysis-card">
+          <div class="analysis-header">
+            <h3 class="analysis-title">Validación de Disposición de Pago</h3>
+            <p class="analysis-desc">Respuesta a: "¿Pagarías $39.000 COP mensuales por esta membresía?"</p>
+          </div>
+          <div id="willingnessBarsContainer" class="metric-bars-list">
+            <!-- Renderizado dinámico -->
+          </div>
+        </div>
+
+        <!-- Gráfica 2: Beneficios más seleccionados -->
+        <div class="analysis-card">
+          <div class="analysis-header">
+            <h3 class="analysis-title">Ranking de Beneficios más Votados</h3>
+            <p class="analysis-desc">Qué buscan principalmente las bailarinas en POLE CLUB</p>
+          </div>
+          <div id="benefitsBarsContainer" class="metric-bars-list">
+            <!-- Renderizado dinámico -->
+          </div>
+        </div>
+      </section>
+
+      <!-- Tabla de Leads con Filtros -->
+      <section>
+        <div class="table-controls-bar">
+          <div class="search-box-wrap">
+            <span class="search-icon">🔍</span>
+            <input 
+              type="text" 
+              id="tableSearchInput" 
+              class="table-search-input" 
+              placeholder="Buscar por nombre, correo o Instagram..."
+            >
+          </div>
+
+          <div class="filters-group">
+            <select id="willingnessFilterSelect" class="filter-select">
+              <option value="">Todas las disposiciones</option>
+              <option value="Sí, me interesa participar">Sí, me interesa</option>
+              <option value="Me interesa, pero quisiera conocer más">Quisiera conocer más</option>
+              <option value="No pagaría ese valor">No pagaría</option>
+            </select>
+
+            <select id="experienceFilterSelect" class="filter-select">
+              <option value="">Toda experiencia</option>
+              <option value="Menos de 6 meses">Menos de 6 meses</option>
+              <option value="Entre 6 meses y 1 año">6 meses a 1 año</option>
+              <option value="Entre 1 y 3 años">1 a 3 años</option>
+              <option value="Más de 3 años">Más de 3 años</option>
+            </select>
+
+            <a id="exportCsvBtn" href="#" class="export-btn" download>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+              <span>Exportar CSV</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="table-card">
+          <div class="table-responsive">
+            <table class="leads-table">
+              <thead>
+                <tr>
+                  <th>Fecha</th>
+                  <th>Nombre Completo</th>
+                  <th>Correo</th>
+                  <th>Instagram</th>
+                  <th>Experiencia</th>
+                  <th>Disposición de Pago</th>
+                  <th>Beneficios de Interés</th>
+                  <th>Acción</th>
+                </tr>
+              </thead>
+              <tbody id="leadsTableBody">
+                <!-- Filas renderizadas por JS -->
+              </tbody>
+            </table>
+          </div>
+          <div id="tableEmptyState" class="empty-state" style="display: none;">
+            No se encontraron registros que coincidan con los criterios de búsqueda.
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- ========================================================================
+       MODAL DE DETALLE DE RESPUESTAS INDIVIDUALES
+       ======================================================================== -->
+  <div id="adminDetailModal" class="admin-modal-overlay" role="dialog" aria-modal="true">
+    <div class="admin-modal-card">
+      <button type="button" id="closeDetailModalBtn" class="admin-modal-close" aria-label="Cerrar detalle">&times;</button>
+      <h3 style="font-family: var(--font-serif); font-size: 1.6rem; color: var(--color-sand); margin-bottom: 1.5rem;">
+        Detalle de Inscripción
+      </h3>
+      <div id="detailModalContent">
+        <!-- Renderizado dinámico -->
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/admin.js"></script>
+</body>
+</html>

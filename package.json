@@ -1,0 +1,19 @@
+{
+  "name": "pole-club",
+  "version": "1.0.0",
+  "description": "POLE CLUB - Landing page y plataforma de validación para la membresía de comunidad de pole dance",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node test.js"
+  },
+  "keywords": [
+    "pole-dance",
+    "wellness",
+    "membership",
+    "community",
+    "full-stack"
+  ],
+  "author": "POLE CLUB Studio",
+  "license": "MIT"
+}
